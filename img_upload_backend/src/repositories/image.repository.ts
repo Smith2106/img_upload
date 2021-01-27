@@ -3,7 +3,7 @@ import path from "path";
 
 import { Image } from "../models";
 
-interface IImagePayload {
+export interface IImagePayload {
     img_path: string;
     img_name: string;
 }
