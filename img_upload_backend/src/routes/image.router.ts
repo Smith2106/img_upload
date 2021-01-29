@@ -4,9 +4,9 @@ import { fileURLToPath } from "url";
 
 import { ImageController } from "../controllers";
 import { storeImage } from "../util/imageStorage";
+import upload from "../config/upload";
 
 const router = express.Router();
-const upload = multer({ dest: "assets/images" });
 
 router.post("/", upload.single('image'), async (req, res) => {
     const controller = new ImageController();
