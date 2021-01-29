@@ -5,7 +5,49 @@
 		"parameters": {},
 		"requestBodies": {},
 		"responses": {},
-		"schemas": {},
+		"schemas": {
+			"Image": {
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"img_path": {
+						"type": "string"
+					},
+					"img_name": {
+						"type": "string"
+					},
+					"uploadedAt": {
+						"type": "string",
+						"format": "date-time"
+					}
+				},
+				"required": [
+					"id",
+					"img_path",
+					"img_name",
+					"uploadedAt"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"IImagePayload": {
+				"properties": {
+					"img_path": {
+						"type": "string"
+					},
+					"img_name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"img_path",
+					"img_name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
 		"securitySchemes": {}
 	},
 	"info": {
@@ -17,7 +59,76 @@
 		"contact": {}
 	},
 	"openapi": "3.0.0",
-	"paths": {},
+	"paths": {
+		"/images": {
+			"post": {
+				"operationId": "CreateImage",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Image"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Image"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IImagePayload"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/images/{id}": {
+			"get": {
+				"operationId": "GetImage",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/Image"
+										}
+									],
+									"nullable": true
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Image"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		}
+	},
 	"servers": [
 		{
 			"url": "/"
